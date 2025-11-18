@@ -1,0 +1,27 @@
+In this section, I describe the methodology by which I enhance the embeddings in RAG systems, leveraging large language models (LLMs) to generate synthetic query-document pairs and extract task abstractions to improve semantic reasoning and generalization.
+
+\subsection{Synthetic Hypothetical Document Training}
+A key challenge in training embeddings for RAG systems lies in ensuring that the representations capture fine-grained alignment between semantically-related inputs throughout the entire embedding space. To address this issue, I propose a training method called Synthetic Hypothetical Document Training. Inspired by techniques that use hypothetical document generation to aid retrieval stages \cite{hyde,query2doc}, my method extends this concept to the training of embedding models. Given a relevant query-document pair ($q$,$d$) , utilizing LLM to generate a concise summary $S$. Providing ($q$,$S$) to LLM and asking LLM to generate a synthetic hypothetical document ($d_{H}$). The embeddings are then optimized using a contrastive learning objective, which aligns the query, document, and hypothetical document within the representation space.
+
+These synthetic documents are designed to provide nuanced semantic relationships that complement the original query-document pairs, adding diversity and depth to the embedding space. By introducing synthetic hypothetical documents into the training pipeline, this approach fosters a richer and more consistent embedding space with better semantic alignment, ultimately enhancing the performance of embeddings in downstream RAG tasks.
+
+
+\subsection{Task Abstraction for Instruction-Based Fine-Tuning}
+Embedding models often struggle to generalize effectively across diverse tasks that require intricate reasoning or domain-specific semantic comprehension. To address this limitation, I propose Task Abstraction for Instruction-Based Fine-Tuning, a methodology inspired by the prompt-based reasoning capabilities of large language models (LLMs) \cite{stepback}. This approach introduces high-level task-specific abstractions as auxiliary inputs during training, providing contextual guidance to embeddings while optimizing their representation space. For each query ($q$,$d$) , a task specific instruction is attached to the query side: 
+\begin{equation} \label{equ:instruct_query}
+    q' = \text{Instruct: \{task\_definition\}}\ \backslash n\ \text{Query:\ }\{q\} 
+\end{equation}
+where "\{task\_definition\}" is a verbal prompt, which specifies the nature of the task. % e.g., "search relevant passages for the query". 
+On top of that, I utilize LLMs to extract structured task abstractions which employ few-shot examples in prompt to produce a high-level concept. The task abstraction is apply the following template the instruction query as to form as a new query during the embedding model's training phase:
+\begin{equation} \label{equ:abstract_query}
+    q'_{abs} = \text{Instruct: \{task\_definition\}}\ \backslash n \text{Abstraction: \{task\_abstract}\} \ \backslash n \text{Query:\ }\{q\}
+\end{equation}
+where "\{task\_definition\}" provides the general concept of the query, %Who is the individual associated with the cryptocurrency industry facing a criminal trial on fraud and conspiracy charges, as reported by both The Verge and TechCrunch, and is accused by prosecutors of committing fraud for personal gain
+e.g. a complex query as "Who is the individual associated with the cryptocurrency industry facing a criminal trial on fraud and conspiracy charges, as reported by both The Verge and TechCrunch, and is accused by prosecutors of committing fraud for personal gain" and "task\_definition" would be "Identify the person in the cryptocurrency industry accused of fraud and conspiracy". The resulting embeddings not only capture the semantic information in the data but also align more closely with the overarching task objective, enriching their representational capacity and bolstering their ability to handle novel or complex downstream tasks. I hope this approach enhances the reasoning and semantic generalization of embedding models within RAG systems, facilitating more robust performance across a broad spectrum of tasks.
+
+
+
+
+% General-purpose embedding models often suffer from inadequate task awareness, limiting their ability to adapt effectively to reasoning-intensive or semantically diverse downstream tasks. To address this, I propose Task Abstraction for Instruction-Based Fine-Tuning, a methodology that incorporates high-level concepts, task abstraction contextual representations into the training of embeddings. I imitate the prompting technique which is used to guide LLM reasoning. Our method uses LLMs to generate task abstractions — concise descriptions outlining the task’s purpose and knowledge field for query. These task abstractions are then appended as auxiliary instructions to the input queries, forming a contextual pair that guides the embeddings toward semantic representations. 
+
+% By fine-tuning embeddings with these enriched inputs, I foster better alignment between the learned embeddings and the semantic reasoning demands of downstream applications. I hope this design improves cross-task generalization and enhances task-specific performance, particularly for applications requiring intricate multi-hop reasoning and semantic flexibility.

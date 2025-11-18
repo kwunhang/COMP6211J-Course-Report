@@ -1,0 +1,36 @@
+
+Improving the effectiveness of embedding models is a critical pillar for advancing RAG systems. Several state-of-the-art approaches aim to enhance embeddings through carefully designed training methodologies. This section highlights four key strategies: model pre-training, contrastive learning and task-specific fine-tuning.
+
+% In Section 3, we explored how echo embeddings
+% can improve over classical embeddings by addressing a fundamental failure mode. In this section, we
+% describe the methodology by which we evaluate
+% echo embeddings on large scale real datasets in
+% 4
+% both the zero-shot and finetuning settings. While
+% finetuning is currently necessary to achieve stateof-the-art performance, zero-shot embeddings have
+% the advantage that they do not require expensive finetuning on top of a pretrained language
+% model. Zero-shot results can also more clearly
+% show how different embedding strategies work on
+% real datasets.
+
+\subsection{Model Pre-training}
+Pre-training is a foundational step in building effective embedding models, enabling them to acquire general-purpose representations from large-scale, unlabeled data. Traditional approaches, such as masked language modeling (MLM), have been widely utilized in models like BERT \cite{bert}and RoBERTa \cite{roberta}, laying the groundwork for dense retrieval tasks. Recent advancements, such as RetroMAE \cite{retromae}, refine pre-training specifically for retrieval-oriented tasks through a masked auto-encoding paradigm. This framework employs asymmetric masking ratios alongside an encoder-decoder architecture to increase reconstruction difficulty, thereby improving the quality of the learned sentence embeddings. 
+
+\subsection{Contrastive Learning}
+
+Contrastive learning has emerged as a powerful paradigm for training embedding models, focusing on distinguishing between semantically similar and dissimilar inputs. SimCSE \cite{simcse} integrates contrastive objectives to improve the alignment and uniformity of embeddings while addressing representation degeneration in their latent space. Multi-modal extensions, such as CLIP \cite{CLIP} and GMC \cite{GMC}, successfully adapt contrastive frameworks to align visual and textual modalities, broadening the applicability of RAG across diverse domains.
+
+\subsection{Task-Specific Fine-Tuning}
+Task-specific fine-tuning is essential for adapting embedding models to downstream applications by addressing inter-task conflicts and tailoring embeddings to task-specific requirements. A prominent approach is instruction-based fine-tuning, where task-specific instructions are appended to inputs during training to provide contextualization. For example, BGE-base-en utilizes verbal prompts (e.g., "search relevant passages for the query") to help the model effectively differentiate between diverse tasks\cite{bge-cpack}. Recent workss have proven effective in aligning embeddings to varying retrieval objectives \cite{task_retrieval, INSTRUCTOR}.
+
+Negative sampling plays a complementary role in enhancing model discriminability. Techniques like SimLM and E5 employ hard negatives derived from mined samples or cross-encoder distillation\cite{simLM,e5embed} , while methods such as ANCE use approximate nearest neighbor (ANN) indices to identify challenging negatives from the corpus\cite{ANCE}. By combining these strategies with instruction-based fine-tuning, as demonstrated by BGE-base-en, embedding models are better equipped to robustly distinguish between related and unrelated content, which is vital for dense retrieval tasks.
+
+% \subsection{Task-Specific Fine-Tuning}
+
+% Task-specific fine-tuning is a critical step in adapting embedding models to downstream applications while addressing the challenges of inter-task conflicts. This approach leverages curated, high-quality datasets to specialize embeddings for specific tasks. A prominent technique in this domain is instruction-based fine-tuning, where explicit task instructions are integrated into inputs during training to aid task differentiation. For instance, BGE-base-en employs instruction-based fine-tuning by appending verbal prompts (e.g., "search relevant passages for the query") to the input, allowing the model to accommodate a diverse range of retrieval objectives effectively\cite{BGE}. Recent works further illustrate the potential of such methods to contextualize embeddings, thereby enabling robust task-specific performance \cite{Task-aware Retrieval with Instructions, Instructor}.
+
+% Another vital component of task-specific fine-tuning is the choice of negative sampling strategy, which plays a decisive role in improving model discriminability. Techniques such as SimLM and E5 make use of hard negatives mined from the corpus or distill knowledge from cross-encoders to enrich training signals \cite{SimLM,E5}. Methods like ANCE\cite{ANCE} employ asynchronously updated Approximate Nearest Neighbor(ANN) indices for identifying hard negatives globally, leveraging the entire corpus to maximize training effectiveness. BGE-base-en integrates instruction-based fine-tuning with advanced negative sampling strategies, demonstrating their complementary strengths in optimizing embeddings for a wide array of retrieval tasks\cite{BGE}. These approaches collectively enhance the capacity of models to effectively differentiate between similar and unrelated content, a core requirement for dense retrieval systems.
+
+% \subsection{Embedding Compression for Scalability}
+
+% Finally, the deployment of embedding models in large-scale RAG systems necessitates consideration of computational efficiency. Compression techniques, including dimensionality reduction, pruning, and quantization, strike a balance between performance and scalability, making such solutions vital for real-world applications. By reducing the memory footprint while preserving embedding fidelity, these methods ensure efficient and cost-effective deployment.

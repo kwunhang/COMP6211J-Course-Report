@@ -1,0 +1,156 @@
+\documentclass{article}
+
+
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2024
+
+
+% ready for submission
+\usepackage[preprint]{neurips_2024}
+
+
+% to compile a preprint version, e.g., for submission to arXiv, add add the
+% [preprint] option:
+%     \usepackage[preprint]{neurips_2024}
+
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+%     \usepackage[final]{neurips_2024}
+
+
+% to avoid loading the natbib package, add option nonatbib:
+%    \usepackage[nonatbib]{neurips_2024}
+
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
+\usepackage{subfiles}
+\usepackage{amsmath} 
+
+\title{COMP6211J Course Report}
+
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to break the
+% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
+% authors names on the first line, and the last on the second line, try using
+% \AND instead of \And before the third author name.
+
+
+\author{%
+  Lau Kwun Hang \\
+  \texttt{khlaube@connect.ust.hk} \\
+  % examples of more authors
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \AND
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\begin{abstract}
+Retrieval-Augmented Generation (RAG) systems have exhibited transformative potential in knowledge-intensive applications by integrating information retrieval with natural language generation. Embedding model is the crucial component of RAG systems , which represent the semantic meaning of data in dense vector spaces and have advanced from static embeddings to sophisticated contextual representations driven by state-of-the-art model architectures. This report provides an extensive review of embedding model underpinning RAG pipelines, exploring different model architectures, training approaches, and evaluation benchmarks, with a focus on understanding their critical role in enabling effective retrieval and generation. Despite significant progress, embedding model still faces challenges in generalizing to complex tasks, such as multi-hop reasoning. To address these limitations, this report proposes two novel methodologies: (1) Synthetic Hypothetical Document Training, which utilizes large language models (LLMs) to generate synthetic documents designed to reinforce semantic relationship modeling, and (2) Task Abstraction for Instruction-Based Fine-Tuning, which incorporates high-level task-specific instructions during training to improve model generalization. The proposed strategies will be evaluated against state-of-the-art embedding baselines through comprehensive benchmarking and ablative analysis to assess their contributions. By enhancing embedding models' representational quality and reasoning capabilities, this research aims to advance the effectiveness of RAG systems in solving knowledge-intensive and reasoning-driven tasks.  % Your summary of the literature review and proposed research idea. 
+\end{abstract}
+
+
+\section{Literature Review}
+\subfile{sections/section1}
+
+\section{Type of Embedding Models for Retrieval-Augmented Generation}
+\label{sec:embeddings}
+\subfile{sections/section2}
+
+% \section{Enhancing Embedding Models for Retrieval-Augmented Generation}
+\section{Embedding Models Training Approach}
+\label{sec:enhancing}
+
+\subfile{sections/section3}
+
+
+\section{Evaluation Benchmarks and Tools Embedding Models}
+\label{sec:benchmarks}
+\subfile{sections/section4}
+
+% \section{Challenges and Research Opportunities}
+% \label{sec:challenges}
+
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+\subfile{sections/section5}
+
+
+\clearpage
+
+
+
+
+\section{Proposed Research Idea}
+\label{sec:Research Plan}
+\subfile{sections/section6}
+
+\section{Research Objectives}
+\label{sec:Objectives}
+\subfile{sections/section7}
+
+\section{Proposed Methodology}
+\label{sec:Methodology}
+\subfile{sections/section8}
+
+\section{Experiment Setup}
+\label{sec:Experimental}
+\subfile{sections/section9}
+
+
+\section{Conclusion}
+\label{sec:Conclusion}
+\subfile{sections/section10}
+
+
+
+% Four pages for literature review.
+
+
+
+\clearpage
+
+
+\bibliographystyle{abbrv}
+\bibliography{report}
+
+
+
+\end{document}

@@ -1,0 +1,31 @@
+
+Embedding models are foundational to RAG systems, encoding semantic representations for both retrieval and generation tasks. These models can be categorized into four major types based on their architecture and functionality: \textit{encoder-only}, \textit{encoder-decoder}, \textit{decoder-only}, and \textit{multi-modal embeddings}.
+
+
+\subsection{Encoder-Only Embeddings}
+
+Encoder-only models are built around transformer encoders that output fixed-length dense embeddings capable of capturing contextual and semantic relationships within text. These embeddings are essential for RAG systems, particularly in the retrieval step, as they enable efficient similarity computation in high-dimensional vector spaces.
+
+BERT  \citep{bert} is one of the most impactful encoder-only models. Its use of deep bidirectional transformers alongside the masked language modeling (MLM) objective enables it to capture rich contextual representations. BERT has been widely adapted for tasks such as semantic search and open-domain question answering, where fine-grained contextual embeddings significantly enhance retrieval efficacy.
+
+RoBERTa \citep{roberta} extends BERT by refining pretraining procedures, such as dynamic masking, training with larger corpora, and removing the Next Sentence Prediction task. These improvements result in more robust embeddings, addressing inefficiencies in standard BERT while maintaining architectural simplicity. Dense Passage Retrieval (DPR) \citep{dpr} builds on encoder-only models by introducing a dual-encoder architecture optimized for retrieval tasks. Its use of contrastive learning pairs questions and passages during training, producing embeddings tailored for retrieval scenarios.
+
+Recent advancements such as BGE \cite{bge-m3} and E5\cite{e5embed} explore broader applications and optimization techniques for encoder-only embeddings. By emphasizing multilingual capabilities and leveraging large-scale pretraining, these models further refine the embedding utility for RAG while maintaining efficiency and scalability.
+
+\subsection{Encoder-Decoder Embeddings}
+
+Encoder-decoder models simultaneously process input sequences and generate outputs, making them particularly well-suited for integrating retrieval and generation in RAG pipelines. These models encode input into intermediate embeddings that encode the semantic and contextual structure of text, which is then processed through the decoder for task-specific outputs.
+
+T5 \citep{T5} exemplifies the strength of encoder-decoder architectures by framing all tasks within a unified text-to-text paradigm. By leveraging a large corpus, T5 enhances transfer learning capabilities, efficiently combining retrieved context with input queries for generative tasks. Its architecture integrates retrieval embeddings to produce task-relevant generations while maintaining flexibility across diverse NLP tasks.
+
+\subsection{Decoder-Only Embeddings}
+
+Decoder-only embeddings are derived from autoregressive language models, which produce outputs token by token. Recent methods demonstrate how decoder-only architectures, originally designed for generation, can also produce high-quality embeddings for retrieval tasks.\\
+For instance, E5-mistral \citep{E5mistral} leveraged powerful decoder-only LLM Mistral\citep{mistral7b} to generate text embeddings by fine-tuning on synthetic datasets.  The embeddings are derived by appending an [EOS] token to the input and extracting the last layer's [EOS] vector. This process reduces the dependency on labeled data while achieving competitive results. NV-Embed \citep{nv-embed} incorporates innovations such as latent attention pooling and contrastive fine-tuning to enhance embedding performance. These models are notable for their capacity to handle long token limits, making them particularly valuable for tasks requiring extended context. However, their large model sizes and inference costs present challenges compared to encoder-only architectures.
+
+\subsection{Multi-Modal Embeddings}
+
+Multi-modal embeddings extend the capabilities of retrieval-augmented systems by processing and aligning diverse data modalities, such as text and images, within a shared embedding space. Early methods, including CLIP \cite{CLIP} and BLIP \cite{BLIP}, leveraged paired image-text datasets and contrastive learning to project these modalities into unified vector spaces. These foundational models established paradigms for cross-modal retrieval while highlighting challenges in alignment and generalization. Recent approaches explore fusion mechanisms to integrate visual and linguistic features more effectively. For instance, UniIR\citep{UnilR} combines multi-modal embeddings by merging text and image features, providing a simpler yet effective solution for cross-modal alignment.
+
+Recent advances aim to develop universal multi-modal embedding models with improved cross-modal alignment. VLM2Vec\citep{VLM2Vec} repurposes pre-trained vision-language models Phi-3.5-V\citep{} using contrastive learning, achieving robust generalization across diverse tasks. MM-GEM\citep{MM-GEM} integrates generation and embedding into a unified forward path, enabling fine-grained tasks such as region-specific retrieval and long-form multi-modal alignment. These developments underline ongoing progress toward versatile and efficient multi-modal embedding frameworks.
+
